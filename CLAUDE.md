@@ -1,4 +1,37 @@
 # CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Build & Development Commands
+
+```bash
+# Install
+pip install .
+# Or with PYTHONPATH for development
+PYTHONPATH=. python3 -m forge <command>
+
+# CLI commands
+python3 -m forge init                                    # Phase 0: スキーマ定義
+python3 -m forge import --file path/to/data.csv          # データインポート
+python3 -m forge train-reward                            # Phase 1: Reward Model
+python3 -m forge train-surrogate                         # Phase 2: Surrogate (GP)
+python3 -m forge propose --condition "temp=250,pressure=1.2"  # Phase 3: 提案
+python3 -m forge evaluate --proposal-id latest           # Phase 4: 評価入力
+python3 -m forge loop --condition "temp=250,pressure=1.2"     # Phase 1→2→3→4 一括
+python3 -m forge status                                  # 現状サマリー
+
+# Tests
+PYTHONPATH=. python3 -m pytest tests/ -v                     # all tests
+PYTHONPATH=. python3 -m pytest tests/test_reward_model.py -v # single file
+PYTHONPATH=. python3 -m pytest tests/test_reward_model.py::TestRewardModel::test_name -v  # single test
+
+# Lint & Format
+ruff check .
+black .
+```
+
+---
+
 # AI開発エージェント向け指示書
 # Human-in-the-Loop データ駆動型最適化システム
 

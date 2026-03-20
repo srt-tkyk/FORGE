@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip uninstall:*)",
+      "Bash(PYTHONPATH=. python3 -m pytest tests/ -v)",
+      "Bash(PYTHONPATH=. python3 -c \"from forge.cli import cli; print\\(''CLI import OK''\\)\")"
+    ]
+  }
+}
